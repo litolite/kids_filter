@@ -1,6 +1,7 @@
 import argparse
 import sqlalchemy as sa
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
 from db_session import engine
 
 Base = declarative_base()
@@ -10,14 +11,42 @@ class User(Base):
     __tablename__ = 'users'
 
     id = sa.Column(sa.Integer(), primary_key=True)
-    username = sa.Column(sa.String(100))
-    password = sa.Column(sa.String(100))
+    username = sa.Column(sa.String(100), nullable=False)
+    password = sa.Column(sa.String(100), nullable=False)
     first_name = sa.Column(sa.String(100), nullable=True)
-    last_name = sa.Column(sa.String(100), nullable=True)
     is_admin = sa.Column(sa.Boolean(), default=True)
+    processes = relationship("Process")
 
     def __repr__(self):
-        return f"{self.username} ({self.first_name}, {self.last_name})"
+        return f"{self.username} ({self.first_name})"
+
+
+class Process(Base):
+    __tablename__ = 'process'
+
+    name = sa.Column(sa.String(100), primary_key=True)
+    username = sa.Column(sa.String(100))
+    owner = sa.Column(sa.Integer, sa.ForeignKey('users.id'))
+
+    def __repr__(self):
+        return f"{self.username} : {self.name}"
+
+
+class Timer(Base):
+    __tablename__ = 'timers'
+
+    id = sa.Column(sa.Integer(), primary_key=True)
+    start_time = sa.Column(sa.Time(), nullable=False)
+    end_time = sa.Column(sa.Time(), nullable=False)
+    day = relationship("DayOfWeek")
+
+
+class DayOfWeek(Base):
+    __tablename__ = 'week_day'
+
+    id = sa.Column(sa.Integer(), primary_key=True)
+    name = sa.Column(sa.String(15))
+    time = sa.Column(sa.Integer, sa.ForeignKey('timers.id'))
 
 
 if __name__ == '__main__':
