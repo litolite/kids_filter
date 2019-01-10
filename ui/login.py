@@ -5,7 +5,6 @@ from PyQt5.QtWidgets import (QWidget, QLabel, QLineEdit, QTextEdit,
 from PyQt5.QtCore import pyqtSlot
 
 
-
 class LoginWindow(QWidget, QGridLayout):
 
     def __init__(self):
