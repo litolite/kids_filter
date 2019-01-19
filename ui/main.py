@@ -2,7 +2,8 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QTableWidgetItem
 from main_window import Ui_MainWindow
 import sys
-from prj_utils.processes import Process
+from db_session import session as Session
+from models import Process
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -11,16 +12,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.process = Process()
-        process = self.process.get_procs()
+        sess = Session()
+        self.processes = [u._asdict() for u in sess.query(Process.username, Process.name).all()]
+
         self.ui.tableWidget.setColumnCount(2)
-        self.ui.tableWidget.setRowCount(len(process))
+        self.ui.tableWidget.setRowCount(len(self.processes))
 
         # Headers for Columns
-        self.ui.tableWidget.setHorizontalHeaderLabels(process[0].keys())
+        self.ui.tableWidget.setHorizontalHeaderLabels(self.processes[0].keys())
 
         row = 0
-        for proc in process:
+        for proc in self.processes:
             col = 0
 
             for item in proc.values():
@@ -29,11 +31,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 cellinfo = QTableWidgetItem(item)
                 self.ui.tableWidget.setItem(row, col, cellinfo)
                 col += 1
-                print(item)
 
             row += 1
-
-
 
     def show_procs(self):
         pass
