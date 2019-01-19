@@ -23,6 +23,7 @@ def update_processes_table():
         print("Done!")
 
 
+update_processes_table()  # For init process table without waiting.
 schedule.every(5).minutes.do(update_processes_table)
 while True:
     schedule.run_pending()
