@@ -2,12 +2,15 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1382</width>
-    <height>772</height>
+    <width>1280</width>
+    <height>800</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -16,23 +19,32 @@
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>1280</width>
+    <height>800</height>
+   </size>
+  </property>
   <property name="maximumSize">
    <size>
-    <width>1920</width>
-    <height>1080</height>
+    <width>1280</width>
+    <height>800</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>Main</string>
   </property>
+  <property name="setFixedSize" stdset="0">
+   <string>(1280, 800)</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>990</x>
-      <y>80</y>
-      <width>321</width>
-      <height>111</height>
+      <x>940</x>
+      <y>70</y>
+      <width>301</width>
+      <height>211</height>
      </rect>
     </property>
     <property name="title">
@@ -175,12 +187,38 @@
       <string>Конец</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="pushButton_3">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>130</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Запретить все</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_4">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>130</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Разрешить все</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>1120</x>
-      <y>680</y>
+      <x>1080</x>
+      <y>630</y>
       <width>161</width>
       <height>41</height>
      </rect>
@@ -192,8 +230,8 @@
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>950</x>
-      <y>680</y>
+      <x>900</x>
+      <y>630</y>
       <width>151</width>
       <height>41</height>
      </rect>
@@ -205,10 +243,10 @@
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>80</y>
+      <x>10</x>
+      <y>70</y>
       <width>871</width>
-      <height>641</height>
+      <height>601</height>
      </rect>
     </property>
     <property name="title">
@@ -220,7 +258,7 @@
        <x>20</x>
        <y>30</y>
        <width>831</width>
-       <height>591</height>
+       <height>561</height>
       </rect>
      </property>
      <property name="editTriggers">
@@ -272,7 +310,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1382</width>
+     <width>1280</width>
      <height>21</height>
     </rect>
    </property>
