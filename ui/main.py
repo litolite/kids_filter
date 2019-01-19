@@ -19,7 +19,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.tableWidget.setRowCount(len(self.processes))
 
         # Headers for Columns
-        self.ui.tableWidget.setHorizontalHeaderLabels(self.processes[0].keys())
+        if not self.processes:
+            pass
+        else:
+            self.ui.tableWidget.setHorizontalHeaderLabels(self.processes[0].keys())
 
         row = 0
         for proc in self.processes:
