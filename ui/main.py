@@ -24,13 +24,15 @@ class MainWindow(QtWidgets.QMainWindow):
             col = 0
 
             for item in proc.values():
-                print(item)
-
+                if item == None:
+                    item = 'Не определен'
                 cellinfo = QTableWidgetItem(item)
                 self.ui.tableWidget.setItem(row, col, cellinfo)
                 col += 1
+                print(item)
 
-        row += 1
+            row += 1
+
 
 
     def show_procs(self):

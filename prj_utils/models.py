@@ -23,9 +23,10 @@ class User(Base):
 
 class Process(Base):
     __tablename__ = 'process'
-
-    name = sa.Column(sa.String(100), primary_key=True)
+    id = sa.Column(sa.Integer, primary_key=True, autoincrement=True)
+    name = sa.Column(sa.String(100))
     username = sa.Column(sa.String(100))
+    is_allowed = sa.Column(sa.Boolean, default=True)
     owner = sa.Column(sa.Integer, sa.ForeignKey('users.id'))
 
     def __repr__(self):
