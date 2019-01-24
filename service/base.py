@@ -3,7 +3,7 @@ from os import getenv
 DATABASE = {
     'default': {
         'drivername': getenv('APP_DATABASES_DEFAULT_ENGINE', 'sqlite'),
-        'database': getenv('APP_DATABASES_DEFAULT_NAME', '../dbdata/db.sqlite3')
+        'database': getenv('APP_DATABASES_DEFAULT_NAME', 'dbdata/db.sqlite3')
     },
 }
 

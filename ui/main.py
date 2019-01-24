@@ -1,5 +1,5 @@
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QTableWidgetItem
+from PyQt5.QtWidgets import QTableWidgetItem, QApplication, QMessageBox
 from main_window import Ui_MainWindow
 import sys
 from db_session import session as Session
@@ -37,13 +37,20 @@ class MainWindow(QtWidgets.QMainWindow):
 
             row += 1
 
+    def closeEvent(self, event):
+        reply = QMessageBox.question(self, 'Message', "Вы уверены, что хотите выйти?",
+                                     QMessageBox.No | QMessageBox.Yes, QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            event.accept()
+        else:
+            event.ignore()
+
     def show_procs(self):
         pass
 
 
 if __name__ == '__main__':
-    app = QtWidgets.QApplication([])
+    # app = QtWidgets.QApplication([])
+    app = QApplication(sys.argv)
     main_window = MainWindow()
-    main_window.show()
-
     sys.exit(app.exec())
