@@ -9,7 +9,6 @@ from prj_utils.models import User
 from ui.main import MainWindow
 
 
-
 class LoginWindow(QWidget, QGridLayout):
 
     def __init__(self):
@@ -59,44 +58,40 @@ class LoginWindow(QWidget, QGridLayout):
 
         self.show()
 
-    def closeEvent(self, event):
-        reply = QMessageBox.question(self, 'Message', "Вы уверены, что хотите выйти?",
+    def closeEvent(self, event, silent=0):
+            reply = QMessageBox.question(self, 'Message', "Вы уверены, что хотите выйти?",
                                      QMessageBox.No | QMessageBox.Yes, QMessageBox.No)
-        if reply == QMessageBox.Yes:
-            event.accept()
-        else:
-            event.ignore()
+            if reply == QMessageBox.Yes:
+                event.accept()
+            else:
+                event.ignore()
 
     def login_btn_method(self):
         login_textbox_Value = self.textbox_login.text()
         password_textbox_Value = self.textbox_password.text()
         sess = Session()
         user = sess.query(User).filter(User.username == login_textbox_Value).count()
+
         if user == 0:
             QMessageBox.question(self, '!ВНИМАНИЕ!', f"Вы ввели неправильное имя пользователя или пароль")
             self.textbox_login.setText("")
             self.textbox_password.setText("")
+
         else:
             user = sess.query(User).filter(User.username == login_textbox_Value).first()
             is_password_right = user.password == password_textbox_Value
+
             if is_password_right:
                 # перейти на MainWindow
-                # QMessageBox.question(self, '!ПРИВЕТСТВУЮ!', f"Пользователь {login_textbox_Value}!")
-                # self.textbox_login.setText("")
-                # self.textbox_password.setText("")
+
                 self.main_window = MainWindow()
                 self.main_window.show()
-
-
+                self.close()
 
             else:
                 QMessageBox.question(self, '!ВНИМАНИЕ!', f"Вы ввели неправильное имя пользователя или пароль")
                 self.textbox_login.setText("")
                 self.textbox_password.setText("")
-
-        # QMessageBox.question(self, '!ВНИМАНИЕ!', f"Вы ввели следующее в поле логина:\
-        #  {login_textbox_Value} и пароля {password_textbox_Value}", QMessageBox.Ok, QMessageBox.Ok)
-
 
 
 if __name__ == '__main__':

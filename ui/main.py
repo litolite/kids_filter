@@ -1,9 +1,9 @@
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QTableWidgetItem, QApplication, QMessageBox
+from PyQt5.QtWidgets import QTableWidgetItem, QApplication, QMessageBox, QCheckBox
 from main_window import Ui_MainWindow
 import sys
 from db_session import session as Session
-from models import Process
+from models import Process, User
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -13,10 +13,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
 
         sess = Session()
-        self.processes = [u._asdict() for u in sess.query(Process.username, Process.name).all()]
+        user = sess.query(User).filter(User.is_admin == True).first()
+        self.processes = [u._asdict() for u in sess.query(Process.username, Process.name, Process.is_allowed).all()]
 
-        self.ui.tableWidget.setColumnCount(2)
+        self.ui.tableWidget.setColumnCount(3)
         self.ui.tableWidget.setRowCount(len(self.processes))
+        self.ui.label_3.setText(str(user))
 
         # Headers for Columns
         if not self.processes:
@@ -32,6 +34,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 if item == None:
                     item = 'Не определен'
                 cellinfo = QTableWidgetItem(item)
+                print(item)
                 self.ui.tableWidget.setItem(row, col, cellinfo)
                 col += 1
 

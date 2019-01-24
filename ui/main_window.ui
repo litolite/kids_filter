@@ -285,7 +285,7 @@
      </rect>
     </property>
     <property name="title">
-     <string>Username</string>
+     <string>User:</string>
     </property>
     <widget class="QLabel" name="label_3">
      <property name="geometry">
@@ -297,7 +297,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Username</string>
+      <string>User</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

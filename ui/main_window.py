@@ -120,6 +120,16 @@ class Ui_MainWindow(object):
         self.pushButton_2.setText(_translate("MainWindow", "Выход"))
         self.groupBox_2.setTitle(_translate("MainWindow", "Список процессов"))
         self.tableWidget.setSortingEnabled(True)
-        self.groupBox_3.setTitle(_translate("MainWindow", "Username"))
-        self.label_3.setText(_translate("MainWindow", "Username"))
+        self.groupBox_3.setTitle(_translate("MainWindow", "User:"))
+        self.label_3.setText(_translate("MainWindow", "User"))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
 
