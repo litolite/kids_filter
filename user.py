@@ -3,6 +3,7 @@ import binascii
 import hashlib
 
 from typing import Optional
+from getpass import getpass
 
 from prj_utils.db_session import session
 from prj_utils.models import User
@@ -94,7 +95,7 @@ def get_users_from_database():
 
 def main():
     username = input("Введите Логин: ")
-    pswd = input("Введите Пароль: ")
+    pswd = getpass("Введите Пароль: ")
     first_name = input("Введите ваше Имя (не обязательно): ")
     is_added = add_user(username, pswd, first_name)
     if is_added:
