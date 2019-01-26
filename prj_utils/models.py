@@ -2,7 +2,7 @@ import argparse
 import sqlalchemy as sa
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-from db_session import engine
+from .db_session import engine
 
 Base = declarative_base()
 
@@ -12,7 +12,7 @@ class User(Base):
 
     id = sa.Column(sa.Integer(), primary_key=True)
     username = sa.Column(sa.String(100), nullable=False)
-    password = sa.Column(sa.String(100), nullable=False)
+    password = sa.Column(sa.String(250), nullable=False)
     first_name = sa.Column(sa.String(100), nullable=True)
     is_admin = sa.Column(sa.Boolean(), default=True)
     processes = relationship("Process")
