@@ -2,7 +2,7 @@ import argparse
 import sqlalchemy as sa
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-from .db_session import engine
+from db_session import engine
 
 Base = declarative_base()
 
@@ -48,6 +48,15 @@ class DayOfWeek(Base):
     id = sa.Column(sa.Integer(), primary_key=True)
     name = sa.Column(sa.String(15))
     time = sa.Column(sa.Integer, sa.ForeignKey('timers.id'))
+
+
+class FirstRun(Base):
+    __tablename__ = 'first_run'
+    key = sa.Column(sa.String(length=15), primary_key=True)
+    value = sa.Column(sa.Boolean, default=True)
+
+    def __repr__(self):
+        return f"{self.key} : {self.value}"
 
 
 if __name__ == '__main__':

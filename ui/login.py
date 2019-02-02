@@ -58,14 +58,14 @@ class LoginWindow(QWidget, QGridLayout):
 
         self.show()
 
-    def closeEvent(self, event, silent=0):
+    """def closeEvent(self, event):
             reply = QMessageBox.question(self, 'Message', "Вы уверены, что хотите выйти?",
                                      QMessageBox.No | QMessageBox.Yes, QMessageBox.No)
             if reply == QMessageBox.Yes:
                 event.accept()
             else:
                 event.ignore()
-
+    """
     def login_btn_method(self):
         login_textbox_Value = self.textbox_login.text()
         password_textbox_Value = self.textbox_password.text()

@@ -34,7 +34,6 @@ class MainWindow(QtWidgets.QMainWindow):
                 if item == None:
                     item = 'Не определен'
                 cellinfo = QTableWidgetItem(item)
-                print(item)
                 self.ui.tableWidget.setItem(row, col, cellinfo)
                 col += 1
 
