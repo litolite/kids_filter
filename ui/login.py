@@ -2,7 +2,8 @@ import sys
 from PyQt5.QtWidgets import (QWidget, QLabel, QLineEdit, QTextEdit,
                              QGridLayout, QApplication, QPushButton, QHBoxLayout, QVBoxLayout,
                              QDialog, QFormLayout, QToolTip, QMessageBox, QDesktopWidget)
-from PyQt5.QtCore import pyqtSlot
+
+from user import verify_password
 
 from prj_utils.db_session import session as Session
 from prj_utils.models import User
@@ -72,6 +73,10 @@ class LoginWindow(QWidget, QGridLayout):
         sess = Session()
         user = sess.query(User).filter(User.username == login_textbox_Value).count()
 
+        # print('*********************')
+        # print(user)
+        # print('*********************')
+
         if user == 0:
             QMessageBox.question(self, '!ВНИМАНИЕ!', f"Вы ввели неправильное имя пользователя или пароль")
             self.textbox_login.setText("")
@@ -79,7 +84,7 @@ class LoginWindow(QWidget, QGridLayout):
 
         else:
             user = sess.query(User).filter(User.username == login_textbox_Value).first()
-            is_password_right = user.password == password_textbox_Value
+            is_password_right = verify_password(user.password, password_textbox_Value)
 
             if is_password_right:
                 # перейти на MainWindow
