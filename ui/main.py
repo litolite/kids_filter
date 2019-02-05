@@ -1,9 +1,9 @@
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QTableWidgetItem, QApplication, QMessageBox, QCheckBox
-from main_window import Ui_MainWindow
+from ui.main_window import Ui_MainWindow
 import sys
-from db_session import session as Session
-from models import Process, User
+from prj_utils.db_session import session as Session
+from prj_utils.models import Process, User
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -26,23 +26,11 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.ui.tableWidget.setHorizontalHeaderLabels(self.processes[0].keys())
 
-        row = 0
-        for proc in self.processes:
-            col = 0
-
-            for item in proc.values():
-                if item == None:
-                    item = 'Не определен'
-                if item is True or False: #TODO сделать конвертацию в чекбоксы поля is_allowed
-                    item = QtWidgets.QCheckBox(self).toggle()
-
-
-
-                cellinfo = QTableWidgetItem(item)
-                self.ui.tableWidget.setItem(row, col, cellinfo)
-                col += 1
-
-            row += 1
+        for row, proc in enumerate(self.processes):
+            self.ui.tableWidget.setItem(row, 0, QTableWidgetItem(proc.get('username')))
+            self.ui.tableWidget.setItem(row, 1, QTableWidgetItem(proc.get('name')))
+            cb = QtWidgets.QCheckBox(parent=self.ui.tableWidget)
+            self.ui.tableWidget.setCellWidget(row, 2, cb)
 
     def closeEvent(self, event):
         reply = QMessageBox.question(self, 'Message', "Вы уверены, что хотите выйти?",

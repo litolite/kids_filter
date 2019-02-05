@@ -1,9 +1,12 @@
+import sys
+sys.path.append("../")
+
 import schedule
 import time
 
 from prj_utils.db_session import session as Session
 from prj_utils.processes import Process as Proc
-from models import Process
+from prj_utils.models import Process
 
 
 def update_processes_table():
