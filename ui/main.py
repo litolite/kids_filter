@@ -33,6 +33,11 @@ class MainWindow(QtWidgets.QMainWindow):
             for item in proc.values():
                 if item == None:
                     item = 'Не определен'
+                if item is True or False: #TODO сделать конвертацию в чекбоксы поля is_allowed
+                    item = QtWidgets.QCheckBox(self).toggle()
+
+
+
                 cellinfo = QTableWidgetItem(item)
                 self.ui.tableWidget.setItem(row, col, cellinfo)
                 col += 1
