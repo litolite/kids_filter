@@ -52,7 +52,7 @@ def verify_password(stored_password: str,
 def add_user(username: str,
              password: str,
              first_name: Optional[str] = None,
-             is_admin: bool = False) -> bool:
+             is_admin: bool = True) -> bool:
     """
     Function for adding users into database
 
@@ -93,7 +93,7 @@ def get_users_from_database():
     return users
 
 
-def main():
+def main(): # TODO не работает из IDE, не возвращает правильные ретурны из cmd (0, 1)
     username = input("Введите Логин: ")
     pswd = getpass("Введите Пароль: ")
     first_name = input("Введите ваше Имя (не обязательно): ")
@@ -106,8 +106,9 @@ def main():
 
 
 if __name__ == '__main__':
-    users = get_users_from_database()
+    main()
+    """users = get_users_from_database()
     for user in users:
         print(f"id: {user.id} Логин: {user.username} | Хэш пароля: {user.password}")
     print("\n")
-    print(main())
+    print(main())"""

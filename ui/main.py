@@ -19,6 +19,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.tableWidget.setColumnCount(3)
         self.ui.tableWidget.setRowCount(len(self.processes))
         self.ui.label_3.setText(str(user))
+        self.ui.pushButton_2.clicked.connect(self.close)
 
         # Headers for Columns
         if not self.processes:
@@ -30,7 +31,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.tableWidget.setItem(row, 0, QTableWidgetItem(proc.get('username')))
             self.ui.tableWidget.setItem(row, 1, QTableWidgetItem(proc.get('name')))
             cb = QtWidgets.QCheckBox(parent=self.ui.tableWidget)
-            self.ui.tableWidget.setCellWidget(row, 2, cb)
+            self.ui.tableWidget.setCellWidget(row, 2, cb)  # TODO  сделать отображение cheked и uncheked в соответсвтии с бд
 
     def closeEvent(self, event):
         reply = QMessageBox.question(self, 'Message', "Вы уверены, что хотите выйти?",
